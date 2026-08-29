@@ -166,37 +166,52 @@
       }
       .identity-strip {
         display: grid;
-        grid-template-columns: 180px minmax(320px, 1fr) 180px;
-        gap: 28px;
+        grid-template-columns: 240px minmax(430px, 1fr) 160px;
+        gap: 30px;
         align-items: center;
-        max-width: 960px;
+        max-width: 1120px;
         margin: 0 auto 27px;
       }
-      .institution-slot {
-        display: grid;
-        min-height: 74px;
-        place-items: center;
-        color: #718087;
-        border: 1px dashed #9ca9aa;
-        background: rgba(255, 254, 250, 0.54);
+      .institution-logo {
+        display: flex;
+        min-height: 104px;
+        align-items: center;
+        justify-content: center;
+      }
+      .institution-logo img { width: auto; object-fit: contain; }
+      .tsinghua-logo img { width: 238px; max-height: 64px; }
+      .ustc-logo img { width: 102px; max-height: 102px; }
+      .author-block { text-align: center; }
+      .authors {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px 18px;
+        justify-content: center;
+        margin-bottom: 10px;
+        color: var(--blue-deep);
+        font-family: var(--serif);
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+      .authors span { white-space: nowrap; }
+      .authors sup, .affiliation-list sup, .contribution-note sup {
+        color: var(--gold);
+        font-family: var(--sans);
+        font-size: 0.62em;
+        font-weight: 600;
+        vertical-align: super;
+      }
+      .affiliation-list { margin-bottom: 8px; color: #586970; font-size: 12px; line-height: 1.45; }
+      .affiliation-list p { margin-bottom: 3px; }
+      .contribution-note {
+        margin-bottom: 0;
+        color: var(--muted);
         font-family: var(--mono);
         font-size: 9px;
-        letter-spacing: 0.08em;
-        text-align: center;
+        letter-spacing: 0.025em;
         text-transform: uppercase;
       }
-      .institution-slot::before {
-        display: block;
-        width: 24px;
-        height: 17px;
-        margin: 0 auto 5px;
-        border: 1px solid currentcolor;
-        border-top-width: 5px;
-        content: "";
-      }
-      .author-block { text-align: center; }
-      .authors { margin-bottom: 4px; color: var(--blue-deep); font-size: 17px; font-weight: 500; }
-      .affiliations { margin-bottom: 0; color: var(--muted); font-size: 13px; }
       .resource-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
       .resource-button {
         display: inline-flex;
@@ -561,7 +576,9 @@
       .reveal { opacity: 1; transform: none; }
 
       @media (max-width: 980px) {
-        .identity-strip { grid-template-columns: 140px 1fr 140px; }
+        .identity-strip { grid-template-columns: 190px 1fr 120px; gap: 20px; }
+        .tsinghua-logo img { width: 185px; }
+        .ustc-logo img { width: 88px; }
         .stat-band { grid-template-columns: repeat(3, 1fr); }
         .stat:nth-child(3) { border-right: 0; }
         .stat:nth-child(-n + 3) { border-bottom: 1px solid var(--rule); }
@@ -578,7 +595,10 @@
         .hero-deck { font-size: 19px; }
         .identity-strip { grid-template-columns: repeat(2, 1fr); }
         .author-block { grid-column: 1 / -1; grid-row: 1; }
-        .institution-slot { min-height: 62px; }
+        .institution-logo { min-height: 72px; }
+        .tsinghua-logo img { width: min(230px, 100%); }
+        .ustc-logo img { width: 80px; }
+        .authors { gap: 3px 12px; font-size: 18px; }
         section { padding: 55px 0; }
         .section-heading { grid-template-columns: 1fr; gap: 10px; }
         .section-index { width: 70px; }
@@ -601,7 +621,7 @@
   </head>
   <body>
     <div class="prototype-strip">
-      Project page preview · author names, institutional logos, paper and evaluation results remain pending
+      Project page preview · paper, dataset links and evaluation results remain pending
     </div>
     <header class="topbar">
       <div class="page-width topbar-inner">
@@ -628,12 +648,26 @@
             real-world event context through an auditable CLI–Agent workflow.
           </p>
           <div class="identity-strip" aria-label="Authors and affiliations">
-            <div class="institution-slot">University logo 01</div>
-            <div class="author-block">
-              <p class="authors">Author Name · Author Name · Author Name · Author Name</p>
-              <p class="affiliations">Institution 1 &nbsp;·&nbsp; Institution 2</p>
+            <div class="institution-logo tsinghua-logo">
+              <img src="world2ts-assets/tsinghua.png" width="712" height="133" alt="Tsinghua University" />
             </div>
-            <div class="institution-slot">University logo 02</div>
+            <div class="author-block">
+              <p class="authors">
+                <span>Zhiding Liu<sup>*1</sup></span>
+                <span>Jiqian Yang<sup>*2</sup></span>
+                <span>Mingyue Chen<sup>†1</sup></span>
+                <span>Zhi Li<sup>†2</sup></span>
+                <span>Enhong Chen<sup>†1</sup></span>
+              </p>
+              <div class="affiliation-list">
+                <p><sup>1</sup> State Key Laboratory of Cognitive Intelligence, University of Science and Technology of China, China</p>
+                <p><sup>2</sup> Shenzhen International Graduate School, Tsinghua University, China</p>
+              </div>
+              <p class="contribution-note"><sup>*</sup> Equal contribution &nbsp;·&nbsp; <sup>†</sup> Corresponding authors</p>
+            </div>
+            <div class="institution-logo ustc-logo">
+              <img src="world2ts-assets/ustc.png" width="299" height="283" alt="University of Science and Technology of China" />
+            </div>
           </div>
           <div class="resource-links">
             <span class="resource-button pending" aria-disabled="true">Paper · soon</span>
@@ -802,14 +836,14 @@
         <div class="page-width reveal">
           <div class="section-heading">
             <span class="section-index">06 · Citation</span>
-            <div class="section-title-wrap"><h2>Cite World2TS.</h2><p class="section-lead">The following entry is a structural placeholder until authorship and venue information are finalized.</p></div>
+            <div class="section-title-wrap"><h2>Cite World2TS.</h2><p class="section-lead">Author information is included below; venue and publication identifiers will be updated after finalization.</p></div>
           </div>
           <div class="citation-grid">
             <div class="bibtex">
               <button class="copy-button" id="copyBibtex">Copy</button>
               <pre id="bibtexText">@misc{world2ts2026,
   title  = {World2TS: Real-World Event Context for Time-Series Forecasting},
-  author = {{World2TS Research Team}},
+  author = {Liu, Zhiding and Yang, Jiqian and Chen, Mingyue and Li, Zhi and Chen, Enhong},
   year   = {2026},
   note   = {Dataset and project page}
 }</pre>

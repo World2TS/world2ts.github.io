@@ -5,7 +5,7 @@ This repository publishes the academic project page for **World2TS: Real-World E
 - Project page: <https://world2ts.github.io/>
 - Code: <https://github.com/yangjq713/World2TS>
 
-The current page is a public layout preview. Author names, institutional logos, paper links, dataset links, and evaluation results will be updated when finalized.
+The current page is a public layout preview. Paper links, dataset links, and evaluation results will be updated when finalized.
 
 ## Local preview
 
@@ -14,4 +14,3 @@ python -m http.server 8000
 ```
 
 Then open <http://localhost:8000/>.
-
