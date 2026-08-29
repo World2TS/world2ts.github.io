@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="World2TS: Real-World Event Context for Time-Series Forecasting. An open dataset, construction workflow, and evaluation suite."
+    />
+    <link rel="canonical" href="https://world2ts.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="World2TS" />
+    <meta property="og:title" content="World2TS: Real-World Event Context for Time-Series Forecasting" />
+    <meta property="og:description" content="An open, human-validated resource aligning diverse time series with scoped real-world event context." />
+    <meta property="og:url" content="https://world2ts.github.io/" />
+    <meta property="og:image" content="https://world2ts.github.io/world2ts-assets/world2ts-mark.png" />
+    <meta name="twitter:card" content="summary" />
+    <title>World2TS · Real-World Event Context for Time-Series Forecasting</title>
+    <link rel="icon" href="world2ts-assets/world2ts-mark.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f6f4ef;
+        --paper-deep: #eeebe3;
+        --white: #fffefa;
+        --ink: #142832;
+        --ink-soft: #40535b;
+        --muted: #6f7c80;
+        --blue: #144d69;
+        --blue-deep: #0e354a;
+        --blue-wash: #e7f0f3;
+        --gold: #c99528;
+        --gold-wash: #faf1d7;
+        --rule: #cbd0cc;
+        --rule-dark: #98a3a4;
+        --serif: "Newsreader", Georgia, "Times New Roman", serif;
+        --sans: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+        --mono: "IBM Plex Mono", Consolas, monospace;
+        --shadow: 0 18px 55px rgba(20, 40, 50, 0.1);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink-soft);
+        background:
+          linear-gradient(rgba(20, 77, 105, 0.026) 1px, transparent 1px),
+          var(--paper);
+        background-size: 100% 44px;
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        text-rendering: optimizeLegibility;
+      }
+      a { color: var(--blue); text-decoration: none; }
+      a:hover { text-decoration: underline; text-underline-offset: 4px; }
+      img { display: block; max-width: 100%; }
+      button, input { font: inherit; }
+      .page-width { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+      .wide-width { width: min(1380px, calc(100% - 48px)); margin-inline: auto; }
+
+      .prototype-strip {
+        padding: 7px 18px;
+        color: #65552f;
+        border-bottom: 1px solid #e2d3ac;
+        background: #fff8e7;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid rgba(152, 163, 164, 0.56);
+        background: rgba(246, 244, 239, 0.94);
+        backdrop-filter: blur(12px);
+      }
+      .topbar-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 64px;
+      }
+      .wordmark {
+        display: inline-flex;
+        gap: 11px;
+        align-items: center;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .wordmark:hover { text-decoration: none; }
+      .wordmark img { width: 39px; height: 39px; object-fit: contain; }
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .nav-links a { color: #3f5057; }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 72px 0 60px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .hero::before, .hero::after {
+        position: absolute;
+        border: 1px solid rgba(20, 77, 105, 0.12);
+        border-radius: 50%;
+        content: "";
+        pointer-events: none;
+      }
+      .hero::before { top: -205px; left: -195px; width: 470px; height: 470px; }
+      .hero::after { right: -125px; bottom: -240px; width: 430px; height: 430px; }
+      .hero-logo {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 19px;
+        object-fit: contain;
+        filter: drop-shadow(0 9px 15px rgba(14, 53, 74, 0.12));
+      }
+      .eyebrow, .section-index, .figure-kicker, .status-label {
+        color: var(--blue);
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+      .eyebrow { margin-bottom: 15px; text-align: center; }
+      h1, h2, h3, p, figure { margin-top: 0; }
+      h1 {
+        max-width: 1080px;
+        margin: 0 auto 21px;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: clamp(47px, 6.2vw, 78px);
+        font-weight: 600;
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        text-align: center;
+      }
+      .title-mark { color: var(--blue); white-space: nowrap; }
+      .hero-deck {
+        max-width: 810px;
+        margin: 0 auto 35px;
+        color: #53646a;
+        font-family: var(--serif);
+        font-size: 23px;
+        line-height: 1.43;
+        text-align: center;
+      }
+      .identity-strip {
+        display: grid;
+        grid-template-columns: 180px minmax(320px, 1fr) 180px;
+        gap: 28px;
+        align-items: center;
+        max-width: 960px;
+        margin: 0 auto 27px;
+      }
+      .institution-slot {
+        display: grid;
+        min-height: 74px;
+        place-items: center;
+        color: #718087;
+        border: 1px dashed #9ca9aa;
+        background: rgba(255, 254, 250, 0.54);
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .institution-slot::before {
+        display: block;
+        width: 24px;
+        height: 17px;
+        margin: 0 auto 5px;
+        border: 1px solid currentcolor;
+        border-top-width: 5px;
+        content: "";
+      }
+      .author-block { text-align: center; }
+      .authors { margin-bottom: 4px; color: var(--blue-deep); font-size: 17px; font-weight: 500; }
+      .affiliations { margin-bottom: 0; color: var(--muted); font-size: 13px; }
+      .resource-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+      .resource-button {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        min-height: 42px;
+        padding: 0 15px;
+        color: var(--white);
+        border: 1px solid var(--blue-deep);
+        background: var(--blue-deep);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: 160ms ease;
+      }
+      .resource-button:hover {
+        color: white;
+        background: var(--blue);
+        text-decoration: none;
+        transform: translateY(-2px);
+      }
+      .resource-button.secondary { color: var(--blue-deep); background: transparent; }
+      .resource-button.pending {
+        color: #69757a;
+        border-color: var(--rule-dark);
+        background: rgba(255, 254, 250, 0.5);
+        cursor: default;
+      }
+      .resource-button.pending:hover { transform: none; }
+
+      section { padding: 76px 0; scroll-margin-top: 72px; }
+      section + section { border-top: 1px solid var(--rule); }
+      .section-heading {
+        display: grid;
+        grid-template-columns: 84px 1fr;
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 34px;
+      }
+      .section-index { padding-top: 11px; border-top: 2px solid var(--gold); }
+      .section-title-wrap { max-width: 850px; }
+      h2 {
+        margin-bottom: 9px;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: clamp(36px, 4.5vw, 52px);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.025em;
+      }
+      .section-lead { margin-bottom: 0; color: var(--muted); font-size: 16px; }
+      h3 {
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 1.18;
+      }
+      .abstract-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+        gap: 46px;
+      }
+      .abstract-copy { color: #34484f; font-family: var(--serif); font-size: 20px; line-height: 1.7; }
+      .abstract-copy strong { color: var(--blue-deep); }
+      .principles { margin: 0; padding: 0; border-top: 1px solid var(--rule-dark); list-style: none; }
+      .principles li {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 12px;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .principles b { color: var(--gold); font-family: var(--mono); font-size: 11px; }
+      .principles strong { display: block; color: var(--ink); font-size: 14px; }
+      .principles span { color: var(--muted); font-size: 13px; }
+
+      .stat-band {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        margin-top: 42px;
+        border-block: 1px solid var(--rule-dark);
+        background: rgba(255, 254, 250, 0.5);
+      }
+      .stat { padding: 23px 12px 20px; border-right: 1px solid var(--rule); text-align: center; }
+      .stat:last-child { border-right: 0; }
+      .stat strong {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--blue-deep);
+        font-family: var(--serif);
+        font-size: 31px;
+        line-height: 1;
+      }
+      .stat span {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      .figure-shell {
+        position: relative;
+        margin: 0;
+        padding: 17px;
+        border: 1px solid var(--rule-dark);
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .figure-shell::before {
+        position: absolute;
+        top: -1px;
+        left: 42px;
+        width: 116px;
+        height: 4px;
+        background: var(--gold);
+        content: "";
+      }
+      .figure-toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: center;
+        min-height: 38px;
+        margin-bottom: 11px;
+      }
+      .figure-toolbar a {
+        flex: 0 0 auto;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .figure-image { width: 100%; height: auto; border: 1px solid #b9bfbd; background: white; }
+      figcaption {
+        max-width: 1060px;
+        margin: 15px auto 0;
+        color: #617075;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      figcaption strong { color: var(--ink); }
+
+      .dataset-toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: end;
+        margin-bottom: 12px;
+      }
+      .dataset-toolbar h3 { margin-bottom: 0; }
+      .search-wrap { min-width: min(360px, 100%); }
+      .search-wrap label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .search-wrap input {
+        width: 100%;
+        height: 39px;
+        padding: 0 11px;
+        color: var(--ink);
+        border: 1px solid var(--rule-dark);
+        outline: none;
+        background: var(--white);
+        font-size: 13px;
+      }
+      .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(20, 77, 105, 0.1); }
+      .table-shell {
+        overflow: auto;
+        max-height: 520px;
+        border: 1px solid var(--rule-dark);
+        background: var(--white);
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 12px; }
+      th, td {
+        padding: 9px 11px;
+        border-right: 1px solid #e0e2de;
+        border-bottom: 1px solid #d9ddda;
+        text-align: left;
+        white-space: nowrap;
+      }
+      th:last-child, td:last-child { border-right: 0; }
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        color: var(--ink);
+        background: #e9eeec;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+      tbody tr:nth-child(even) { background: #faf9f5; }
+      tbody tr:hover { background: var(--gold-wash); }
+      .domain-pill {
+        display: inline-block;
+        padding: 1px 7px;
+        color: var(--blue-deep);
+        border: 1px solid #b7c9cf;
+        background: var(--blue-wash);
+        font-family: var(--mono);
+        font-size: 8px;
+        text-transform: uppercase;
+      }
+      .table-note {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 8px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 9px;
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+        gap: 24px;
+        margin-top: 45px;
+      }
+      .analysis-card { display: flex; flex-direction: column; min-width: 0; }
+      .analysis-card h3 { font-size: 24px; }
+      .analysis-card > p { min-height: 52px; color: var(--muted); font-size: 13px; }
+      .coverage-table { max-height: 390px; }
+      .coverage-value { color: var(--blue-deep); font-family: var(--mono); font-weight: 500; }
+
+      .placeholder {
+        position: relative;
+        display: grid;
+        flex: 1;
+        min-height: 390px;
+        padding: 36px;
+        place-items: center;
+        overflow: hidden;
+        color: #66777c;
+        border: 1px dashed #8f9c9d;
+        background:
+          linear-gradient(90deg, rgba(20, 77, 105, 0.035) 1px, transparent 1px),
+          linear-gradient(rgba(20, 77, 105, 0.035) 1px, transparent 1px),
+          rgba(255, 254, 250, 0.54);
+        background-size: 28px 28px;
+        text-align: center;
+      }
+      .placeholder::before, .placeholder::after {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        content: "";
+      }
+      .placeholder::before {
+        top: 13px;
+        left: 13px;
+        border-top: 2px solid var(--gold);
+        border-left: 2px solid var(--gold);
+      }
+      .placeholder::after {
+        right: 13px;
+        bottom: 13px;
+        border-right: 2px solid var(--gold);
+        border-bottom: 2px solid var(--gold);
+      }
+      .placeholder-inner { max-width: 390px; }
+      .placeholder-icon {
+        display: inline-grid;
+        width: 53px;
+        height: 53px;
+        margin-bottom: 17px;
+        place-items: center;
+        color: var(--blue);
+        border: 1px solid var(--blue);
+        border-radius: 50%;
+        font-family: var(--serif);
+        font-size: 27px;
+      }
+      .placeholder h3 { margin-bottom: 7px; font-size: 25px; }
+      .placeholder p { margin-bottom: 13px; font-size: 13px; }
+      .placeholder small {
+        display: inline-block;
+        padding: 4px 8px;
+        color: #7a6634;
+        border: 1px solid #d7c084;
+        background: #fff9e8;
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .stack { display: grid; gap: 46px; }
+      .analysis-caption { margin-bottom: 13px; }
+      .analysis-caption p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+      .pending-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+      .evaluation-main { min-height: 360px; margin-bottom: 24px; }
+      .forecast-placeholders { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .forecast-placeholder { min-height: 245px; padding: 24px; }
+      .forecast-placeholder .placeholder-icon { width: 42px; height: 42px; font-size: 21px; }
+      .forecast-placeholder h3 { font-size: 21px; }
+      .availability-note {
+        margin-top: 28px;
+        padding: 17px 19px;
+        color: #625a47;
+        border-left: 3px solid var(--gold);
+        background: #fbf4e2;
+        font-size: 13px;
+      }
+
+      .citation-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 32px; }
+      .bibtex { position: relative; border: 1px solid var(--rule-dark); background: #172a34; }
+      pre {
+        margin: 0;
+        padding: 23px;
+        overflow: auto;
+        color: #e9efed;
+        font-family: var(--mono);
+        font-size: 11px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+      .copy-button {
+        position: absolute;
+        top: 9px;
+        right: 9px;
+        padding: 5px 8px;
+        color: #d7e0dd;
+        border: 1px solid #61737a;
+        background: #233d49;
+        cursor: pointer;
+        font-family: var(--mono);
+        font-size: 8px;
+        text-transform: uppercase;
+      }
+      .release-card { padding: 22px; border-top: 3px solid var(--blue); background: var(--white); box-shadow: var(--shadow); }
+      .release-card p { color: var(--muted); font-size: 13px; }
+      .release-card code {
+        display: block;
+        margin-top: 9px;
+        color: var(--blue-deep);
+        font-family: var(--mono);
+        font-size: 10px;
+      }
+      footer {
+        padding: 31px 0;
+        color: #6c777a;
+        border-top: 1px solid var(--rule-dark);
+        background: var(--paper-deep);
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.04em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .reveal { opacity: 1; transform: none; }
+
+      @media (max-width: 980px) {
+        .identity-strip { grid-template-columns: 140px 1fr 140px; }
+        .stat-band { grid-template-columns: repeat(3, 1fr); }
+        .stat:nth-child(3) { border-right: 0; }
+        .stat:nth-child(-n + 3) { border-bottom: 1px solid var(--rule); }
+        .abstract-grid, .analysis-grid, .citation-grid { grid-template-columns: 1fr; }
+        .analysis-card > p { min-height: 0; }
+        .forecast-placeholders { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 720px) {
+        .page-width, .wide-width { width: min(100% - 28px, 1160px); }
+        .nav-links { display: none; }
+        .hero { padding-top: 48px; }
+        .hero-logo { width: 76px; height: 76px; }
+        h1 { font-size: 44px; }
+        .hero-deck { font-size: 19px; }
+        .identity-strip { grid-template-columns: repeat(2, 1fr); }
+        .author-block { grid-column: 1 / -1; grid-row: 1; }
+        .institution-slot { min-height: 62px; }
+        section { padding: 55px 0; }
+        .section-heading { grid-template-columns: 1fr; gap: 10px; }
+        .section-index { width: 70px; }
+        h2 { font-size: 38px; }
+        .stat-band { grid-template-columns: repeat(2, 1fr); }
+        .stat:nth-child(3) { border-right: 1px solid var(--rule); }
+        .stat:nth-child(even) { border-right: 0; }
+        .stat:nth-child(-n + 4) { border-bottom: 1px solid var(--rule); }
+        .dataset-toolbar { align-items: stretch; flex-direction: column; }
+        .pending-pair { grid-template-columns: 1fr; }
+        .placeholder { min-height: 310px; }
+        .figure-shell { padding: 10px; }
+        .figure-toolbar { align-items: flex-start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="prototype-strip">
+      Project page preview · author names, institutional logos, paper and evaluation results remain pending
+    </div>
+    <header class="topbar">
+      <div class="page-width topbar-inner">
+        <a class="wordmark" href="#top" aria-label="World2TS home">
+          <img src="world2ts-assets/world2ts-mark.png" width="1254" height="1254" alt="" />
+          <span>World2TS</span>
+        </a>
+        <nav class="nav-links" aria-label="Page navigation">
+          <a href="#overview">Overview</a><a href="#framework">Framework</a>
+          <a href="#dataset">Dataset</a><a href="#analysis">Analysis</a>
+          <a href="#evaluation">Evaluation</a><a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <header class="hero">
+        <div class="page-width">
+          <img class="hero-logo" src="world2ts-assets/world2ts-mark.png" width="1254" height="1254" alt="World2TS globe and time-series logo" />
+          <div class="eyebrow">Open Dataset · Real-World Events × Time Series</div>
+          <h1><span class="title-mark">World2TS:</span> Real-World Event Context for Time-Series Forecasting</h1>
+          <p class="hero-deck">
+            A human-validated resource that aligns diverse time series with scoped, temporally honest
+            real-world event context through an auditable CLI–Agent workflow.
+          </p>
+          <div class="identity-strip" aria-label="Authors and affiliations">
+            <div class="institution-slot">University logo 01</div>
+            <div class="author-block">
+              <p class="authors">Author Name · Author Name · Author Name · Author Name</p>
+              <p class="affiliations">Institution 1 &nbsp;·&nbsp; Institution 2</p>
+            </div>
+            <div class="institution-slot">University logo 02</div>
+          </div>
+          <div class="resource-links">
+            <span class="resource-button pending" aria-disabled="true">Paper · soon</span>
+            <a class="resource-button" href="https://github.com/yangjq713/World2TS">Code · GitHub</a>
+            <a class="resource-button secondary" href="#dataset">Dataset · Preview</a>
+            <span class="resource-button pending" aria-disabled="true">Hugging Face · soon</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="overview">
+        <div class="page-width reveal">
+          <div class="section-heading">
+            <span class="section-index">01 · Overview</span>
+            <div class="section-title-wrap">
+              <h2>Events grounded in the series they describe.</h2>
+              <p class="section-lead">World2TS combines mature public time-series collections with newly collected online series under one event-aware release contract.</p>
+            </div>
+          </div>
+          <div class="abstract-grid">
+            <p class="abstract-copy">
+              Forecasting in the real world is rarely isolated from policy decisions, extreme weather,
+              public-health shifts, operational disruptions, and market news. <strong>World2TS</strong>
+              connects these events to the series for which they are semantically relevant—without
+              treating temporal co-occurrence as causality. An LLM handles semantic judgment, the CLI
+              enforces deterministic contracts, and humans approve both the search strategy and the final publication.
+            </p>
+            <ol class="principles">
+              <li><b>01</b><div><strong>Scoped event links</strong><span>Events are projected only to supported series.</span></div></li>
+              <li><b>02</b><div><strong>Honest time roles</strong><span>Actual, forecast, decision, concurrent, and retrospective context remain distinct.</span></div></li>
+              <li><b>03</b><div><strong>Human accountability</strong><span>Two review gates bind approval to exact artifacts.</span></div></li>
+            </ol>
+          </div>
+          <div class="stat-band" aria-label="Dataset snapshot">
+            <div class="stat"><strong>31</strong><span>Datasets</span></div>
+            <div class="stat"><strong>4,179</strong><span>Series</span></div>
+            <div class="stat"><strong>97.1M</strong><span>Observations</span></div>
+            <div class="stat"><strong>1,159</strong><span>Events</span></div>
+            <div class="stat"><strong>56,846</strong><span>Event links</span></div>
+            <div class="stat"><strong>7</strong><span>Domain groups</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="framework">
+        <div class="wide-width reveal">
+          <div class="section-heading">
+            <span class="section-index">02 · Framework</span>
+            <div class="section-title-wrap">
+              <h2>Agent judgment, CLI execution, human approval.</h2>
+              <p class="section-lead">A real RWTC case makes every stage concrete—from series semantics and evidence retrieval to event screening, revision, approval, and publication.</p>
+            </div>
+          </div>
+          <figure class="figure-shell">
+            <div class="figure-toolbar">
+              <span class="figure-kicker">Construction framework · real energy case</span>
+              <a href="world2ts-assets/framework.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a>
+            </div>
+            <img class="figure-image" src="world2ts-assets/framework-preview.png" width="2120" height="1178" alt="World2TS human-in-the-loop CLI and agent framework" />
+            <figcaption><strong>Framework.</strong> The Agent proposes semantics, search plans, and event decisions; the CLI validates and persists them; two human gates approve the strategy and final resource.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="dataset">
+        <div class="wide-width reveal">
+          <div class="section-heading">
+            <span class="section-index">03 · Dataset</span>
+            <div class="section-title-wrap">
+              <h2>One release, many data origins.</h2>
+              <p class="section-lead">LOTSA-derived collections and eight online source adapters enter the same strict Arrow + metadata boundary before event discovery.</p>
+            </div>
+          </div>
+          <div class="dataset-toolbar">
+            <h3>Dataset inventory</h3>
+            <div class="search-wrap">
+              <label for="datasetSearch">Filter by dataset or domain</label>
+              <input id="datasetSearch" type="search" placeholder="e.g. transport, bitcoin, RWTC…" />
+            </div>
+          </div>
+          <div class="table-shell" aria-label="World2TS dataset inventory">
+            <table>
+              <thead><tr><th>Name</th><th>Domain</th><th>Frequency</th><th>Series</th><th>Time span</th><th>Events</th></tr></thead>
+              <tbody id="datasetRows"></tbody>
+            </table>
+          </div>
+          <div class="table-note"><span id="datasetCount">31 datasets shown</span><span>Snapshot generated from the current World2TS analysis tables</span></div>
+
+          <div class="analysis-grid">
+            <article class="analysis-card">
+              <h3>Event coverage by dataset</h3>
+              <p>Average linked events per series and the fraction of series with at least one in-range event.</p>
+              <div class="table-shell coverage-table">
+                <table><thead><tr><th>Name</th><th>Avg. events / series</th><th>Series coverage</th></tr></thead><tbody id="coverageRows"></tbody></table>
+              </div>
+            </article>
+            <article class="analysis-card">
+              <h3>Temporal coverage</h3>
+              <p>Reserved for the final choice between a compact coverage table and a time-span visualization.</p>
+              <div class="placeholder">
+                <div class="placeholder-inner">
+                  <span class="placeholder-icon">↔</span><h3>Temporal Coverage</h3>
+                  <p>Dataset time spans, event density over time, and window-level coverage will be placed here.</p>
+                  <small>Reserved figure / table · analysis pending</small>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="analysis">
+        <div class="wide-width reveal">
+          <div class="section-heading">
+            <span class="section-index">04 · Analysis</span>
+            <div class="section-title-wrap">
+              <h2>What kinds of events does World2TS capture?</h2>
+              <p class="section-lead">Dataset-level semantic summaries and series-aligned case studies reveal both event diversity and the limits of interpretation.</p>
+            </div>
+          </div>
+          <div class="stack">
+            <div>
+              <div class="analysis-caption"><h3>Domain event vocabulary</h3><p>Atomic event concepts are shown separately for seven domain groups; calendar observances are fused and visually capped.</p></div>
+              <figure class="figure-shell">
+                <div class="figure-toolbar"><span class="figure-kicker">Semantic landscape · seven domains</span><a href="world2ts-assets/word-cloud.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                <img class="figure-image" src="world2ts-assets/word-cloud-preview.png" width="1974" height="1200" alt="Domain-specific word clouds for seven World2TS domains" />
+                <figcaption><strong>Semantic topics.</strong> Phrase-preserving word clouds summarize event families rather than raw summary tokens, keeping each domain visually and statistically separate.</figcaption>
+              </figure>
+            </div>
+            <div>
+              <div class="analysis-caption"><h3>Series–event case studies</h3><p>Six cases span weather, finance, health, transport, crypto, and energy; shaded windows show temporal context rather than causal effects.</p></div>
+              <figure class="figure-shell">
+                <div class="figure-toolbar"><span class="figure-kicker">Case study · six domain examples</span><a href="world2ts-assets/case-study.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                <img class="figure-image" src="world2ts-assets/case-study-preview.png" width="2118" height="1172" alt="Six time-series event case studies across World2TS domains" />
+                <figcaption><strong>Case studies.</strong> Each panel preserves the original series semantics, marks event time and a local context window, and accompanies the chart with a scoped event description.</figcaption>
+              </figure>
+            </div>
+            <div class="pending-pair">
+              <div class="placeholder"><div class="placeholder-inner"><span class="placeholder-icon">Δ</span><h3>Before / After Event Statistics</h3><p>Reserved for domain- or dataset-level changes in location, scale, volatility, and trend around validated events.</p><small>Reserved figure · experiment pending</small></div></div>
+              <div class="placeholder"><div class="placeholder-inner"><span class="placeholder-icon">τ</span><h3>Event-Time Robustness</h3><p>Reserved for matched controls, alternative windows, and robustness checks supporting the before/after analysis.</p><small>Reserved companion analysis</small></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="evaluation">
+        <div class="wide-width reveal">
+          <div class="section-heading">
+            <span class="section-index">05 · Evaluation</span>
+            <div class="section-title-wrap">
+              <h2>Does real-world event context improve forecasting?</h2>
+              <p class="section-lead">This section is intentionally reserved until the forecasting protocol, baselines, main results, and qualitative examples are frozen.</p>
+            </div>
+          </div>
+          <div class="placeholder evaluation-main"><div class="placeholder-inner"><span class="placeholder-icon">∑</span><h3>Main Forecasting Results</h3><p>Primary comparison table across forecasting models, horizons, domains, and event-context settings.</p><small>Reserved main table · evaluation pending</small></div></div>
+          <div class="forecast-placeholders">
+            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">A</span><h3>Forecast Case A</h3><p>Prediction with and without World2TS context.</p><small>Reserved qualitative result</small></div></div>
+            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">B</span><h3>Forecast Case B</h3><p>Event-sensitive forecast comparison.</p><small>Reserved qualitative result</small></div></div>
+            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">C</span><h3>Forecast Case C</h3><p>Failure mode or context-ablation example.</p><small>Reserved qualitative result</small></div></div>
+          </div>
+          <p class="availability-note">The empty areas are deliberate layout reservations. Their aspect ratios match likely paper-table and three-panel forecasting outputs, so completed evaluation assets can be inserted without changing the page hierarchy.</p>
+        </div>
+      </section>
+
+      <section id="citation">
+        <div class="page-width reveal">
+          <div class="section-heading">
+            <span class="section-index">06 · Citation</span>
+            <div class="section-title-wrap"><h2>Cite World2TS.</h2><p class="section-lead">The following entry is a structural placeholder until authorship and venue information are finalized.</p></div>
+          </div>
+          <div class="citation-grid">
+            <div class="bibtex">
+              <button class="copy-button" id="copyBibtex">Copy</button>
+              <pre id="bibtexText">@misc{world2ts2026,
+  title  = {World2TS: Real-World Event Context for Time-Series Forecasting},
+  author = {{World2TS Research Team}},
+  year   = {2026},
+  note   = {Dataset and project page}
+}</pre>
+            </div>
+            <aside class="release-card">
+              <span class="status-label">Public contract</span><h3>Minimal by design.</h3>
+              <p>The release exposes dataset information, canonical events, and series-scoped event links.</p>
+              <code>dataset_info.json</code><code>unified_events.jsonl</code><code>unified_event_series.jsonl</code>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer><div class="page-width">World2TS academic project page · preview release 2026-08-29</div></footer>
+
+    <script>
+      const datasets = [
+        ["bitcoin_with_missing", "Crypto", "1 day", 18, "2009-01-03 → 2021-06-19", 62],
+        ["crypto_bitcoin_daily", "Crypto", "1 day", 1, "2025-08-13 → 2026-08-11", 23],
+        ["australian_electricity_demand", "Energy", "30 min", 5, "2002-01-01 → 2015-03-25", 180],
+        ["bdg-2_bear", "Energy", "1 hour", 91, "2016-01-01 → 2017-12-31", 59],
+        ["bdg-2_fox", "Energy", "1 hour", 135, "2016-01-01 → 2017-12-31", 37],
+        ["bdg-2_panther", "Energy", "1 hour", 105, "2017-01-01 → 2017-12-31", 27],
+        ["bdg-2_rat", "Energy", "1 hour", 280, "2016-01-01 → 2017-12-31", 36],
+        ["bull", "Energy", "1 hour", 41, "2016-01-01 → 2017-12-31", 41],
+        ["energy_rwtc_daily", "Energy", "1 day", 1, "2024-01-02 → 2024-12-31", 19],
+        ["lcl", "Energy", "1 hour", 713, "2012-01-01 → 2013-12-31", 33],
+        ["sceaux", "Energy", "1 hour", 1, "2007-01-01 → 2010-11-26", 28],
+        ["smart", "Energy", "1 hour", 5, "2014-01-01 → 2017-01-01", 30],
+        ["spain", "Energy", "1 hour", 1, "2015-01-01 → 2018-12-31", 26],
+        ["beijing_air_quality", "Environment", "1 hour", 132, "2013-03-01 → 2017-02-28", 54],
+        ["finance_us_tech_daily", "Finance", "1 day", 3, "2024-01-02 → 2024-12-31", 23],
+        ["macro_fred_dgs10_daily", "Finance", "1 day", 1, "2024-01-02 → 2024-12-31", 11],
+        ["polymarket_fed_daily", "Finance", "1 day", 1, "2025-09-30 → 2026-08-12", 24],
+        ["cdc_fluview_ilinet", "Health", "1 week", 316, "1997-10-12 → 2023-10-22", 19],
+        ["health_covid_usa_daily", "Health", "1 day", 1, "2022-01-01 → 2022-12-31", 18],
+        ["covid_mobility", "Transport", "1 day", 362, "2020-02-15 → 2021-04-02", 84],
+        ["loop_seattle", "Transport", "5 min", 323, "2015-01-01 → 2015-12-31", 29],
+        ["los_loop", "Transport", "5 min", 207, "2012-03-01 → 2012-06-27", 12],
+        ["M_DENSE", "Transport", "1 hour", 30, "2018-01-01 → 2019-12-31", 53],
+        ["pedestrian_counts", "Transport", "1 hour", 66, "2009-05-01 → 2020-04-29", 129],
+        ["PEMS_BAY", "Transport", "5 min", 325, "2017-01-01 → 2017-06-30", 22],
+        ["SHMETRO", "Transport", "15 min", 576, "2016-07-01 → 2016-09-30", 6],
+        ["SZ_TAXI", "Transport", "15 min", 156, "2015-01-01 → 2015-01-31", 3],
+        ["transport_us_proxy_daily", "Transport", "1 day", 4, "2024-01-02 → 2024-12-31", 15],
+        ["kdd_cup_2018_with_missing", "Weather", "1 hour", 270, "2017-01-01 → 2018-03-24", 30],
+        ["oikolab_weather", "Weather", "1 hour", 8, "2010-01-01 → 2021-06-01", 16],
+        ["weather_isd_jfk_tmp_hourly", "Weather", "1 hour", 1, "2024-01-01 → 2025-01-01", 10],
+      ];
+      const coverage = [
+        ["bitcoin_with_missing", 51.11, 100.0], ["crypto_bitcoin_daily", 23.0, 100.0],
+        ["australian_electricity_demand", 101.4, 100.0], ["bdg-2_bear", 44.53, 100.0],
+        ["bdg-2_fox", 20.99, 100.0], ["bdg-2_panther", 18.95, 100.0],
+        ["bdg-2_rat", 21.04, 100.0], ["bull", 30.32, 100.0],
+        ["energy_rwtc_daily", 19.0, 100.0], ["lcl", 18.95, 99.9], ["sceaux", 28.0, 100.0],
+        ["smart", 21.4, 100.0], ["spain", 26.0, 100.0], ["beijing_air_quality", 34.3, 100.0],
+        ["finance_us_tech_daily", 10.0, 100.0], ["macro_fred_dgs10_daily", 11.0, 100.0],
+        ["polymarket_fed_daily", 24.0, 100.0], ["cdc_fluview_ilinet", 8.97, 100.0],
+        ["health_covid_usa_daily", 18.0, 100.0], ["covid_mobility", 0.92, 76.5],
+        ["loop_seattle", 12.95, 100.0], ["los_loop", 2.34, 100.0], ["M_DENSE", 52.67, 100.0],
+        ["pedestrian_counts", 43.17, 98.5], ["PEMS_BAY", 4.04, 98.2], ["SHMETRO", 5.19, 100.0],
+        ["SZ_TAXI", 2.0, 100.0], ["transport_us_proxy_daily", 4.0, 100.0],
+        ["kdd_cup_2018_with_missing", 13.29, 100.0], ["oikolab_weather", 16.0, 100.0],
+        ["weather_isd_jfk_tmp_hourly", 10.0, 100.0],
+      ];
+
+      const datasetRows = document.querySelector("#datasetRows");
+      const coverageRows = document.querySelector("#coverageRows");
+      const datasetCount = document.querySelector("#datasetCount");
+      const renderDatasets = (query = "") => {
+        const normalized = query.trim().toLowerCase();
+        const filtered = datasets.filter((row) => row.join(" ").toLowerCase().includes(normalized));
+        datasetRows.replaceChildren(...filtered.map((row) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${row[0]}</td><td><span class="domain-pill">${row[1]}</span></td><td>${row[2]}</td><td>${row[3].toLocaleString()}</td><td>${row[4]}</td><td>${row[5]}</td>`;
+          return tr;
+        }));
+        datasetCount.textContent = `${filtered.length} dataset${filtered.length === 1 ? "" : "s"} shown`;
+      };
+      coverageRows.replaceChildren(...coverage.map((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row[0]}</td><td class="coverage-value">${row[1].toFixed(2)}</td><td class="coverage-value">${row[2].toFixed(1)}%</td>`;
+        return tr;
+      }));
+      renderDatasets();
+      document.querySelector("#datasetSearch").addEventListener("input", (event) => renderDatasets(event.currentTarget.value));
+
+      const copyButton = document.querySelector("#copyBibtex");
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(document.querySelector("#bibtexText").textContent);
+          copyButton.textContent = "Copied";
+          window.setTimeout(() => (copyButton.textContent = "Copy"), 1200);
+        } catch { copyButton.textContent = "Select manually"; }
+      });
+
+    </script>
+  </body>
+</html>
