@@ -5,7 +5,7 @@ This repository publishes the academic project page for **World2TS: Real-World E
 - Project page: <https://world2ts.github.io/>
 - Code: <https://github.com/yangjq713/World2TS>
 
-The current page is a public layout preview. Paper links, dataset links, and evaluation results will be updated when finalized.
+The current page is a public layout preview. The main evaluation table is included; paper links, dataset downloads, and qualitative forecasting cases will be updated when finalized.
 
 ## Local preview
 
