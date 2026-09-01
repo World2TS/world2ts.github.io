@@ -983,9 +983,9 @@
         .alignment-story-head { align-items: flex-start; flex-direction: column; }
         .story-plot, .story-plot svg { min-height: 350px; height: 350px; }
         .story-live-badge { display: none; }
-        .story-event-card { top: 49px; right: 12px; width: 66%; padding: 11px 13px; }
-        .story-event-card strong { font-size: 15px; }
-        .story-event-card p { font-size: 9px; }
+        .story-event-card { top: 49px; right: 10px; width: 44%; padding: 10px 11px; }
+        .story-event-card strong { font-size: 13px; }
+        .story-event-card p { font-size: 8px; }
         .story-timeline-footer { grid-template-columns: 1fr auto; }
         .story-progress-track { grid-column: 1 / -1; grid-row: 2; }
         .pending-pair { grid-template-columns: 1fr; }
@@ -1091,7 +1091,7 @@
               <div class="alignment-story-copy">
                 <span class="figure-kicker">World2TS at a glance · real multi-event energy series</span>
                 <h3 id="alignmentStoryTitle">Watch verified events enter a moving time series.</h3>
-                <p>The animation follows real 2024 RWTC observations through a rolling 70-point window. Eleven representative verified events appear in temporal order while the series continues to advance; each marker is linked context, not a claim of causality.</p>
+                <p>The center line always marks the latest observation. Real 2024 RWTC history moves left as eleven representative verified events enter at the center; each marker is linked context, not a claim of causality.</p>
               </div>
               <button class="story-replay" id="storyReplay" type="button" aria-label="Pause the moving time-series animation">Pause timeline</button>
             </div>
@@ -1105,8 +1105,8 @@
                   <p id="storyEventSummary">North Dakota output and several U.S. refineries were disrupted.</p>
                 </aside>
                 <svg id="alignmentChart" viewBox="0 0 1040 430" role="img" aria-labelledby="alignmentChartTitle alignmentChartDesc">
-                  <title id="alignmentChartTitle">Moving 2024 WTI spot-price timeline with verified events</title>
-                  <desc id="alignmentChartDesc">A rolling window advances through real daily RWTC observations. Event markers and cards appear when verified events enter the timeline.</desc>
+                  <title id="alignmentChartTitle">Center-anchored 2024 WTI spot-price timeline with verified events</title>
+                  <desc id="alignmentChartDesc">Real daily RWTC history moves left while the latest observation remains at the center. Verified event markers appear when they reach that fixed current-time position.</desc>
                   <line class="story-gridline" x1="66" x2="1008" y1="163" y2="163"></line>
                   <line class="story-gridline" x1="66" x2="1008" y1="256" y2="256"></line>
                   <line class="story-gridline" x1="66" x2="1008" y1="350" y2="350"></line>
@@ -1123,7 +1123,7 @@
                   <text class="story-tick-label" x="55" y="167" text-anchor="end">85</text>
                   <text class="story-tick-label" x="55" y="260" text-anchor="end">75</text>
                   <text class="story-tick-label" x="55" y="354" text-anchor="end">65</text>
-                  <text class="story-tick-label" x="66" y="405">Rolling 70-observation window · verified events remain visible while in view</text>
+                  <text class="story-tick-label" x="66" y="405">Observed history moves left · latest observation remains centered</text>
                 </svg>
               </div>
               <div class="story-timeline-footer" aria-label="Animation progress">
@@ -1541,6 +1541,7 @@
       const svgNamespace = "http://www.w3.org/2000/svg";
       const plotLeft = 66;
       const plotRight = 1008;
+      const plotFocus = (plotLeft + plotRight) / 2;
       const plotTop = 116;
       const plotBottom = 350;
       const valueMin = 65;
@@ -1583,7 +1584,7 @@
         const windowStart = Math.max(0, currentCursor - rollingWindow + 1);
         const firstIndex = Math.ceil(windowStart);
         const windowSpan = rollingWindow - 1;
-        const storyX = (index) => plotLeft + ((index - windowStart) / windowSpan) * (plotRight - plotLeft);
+        const storyX = (index) => plotFocus - ((currentCursor - index) / windowSpan) * (plotFocus - plotLeft);
         const pathParts = [];
         for (let index = firstIndex; index <= lastIndex; index += 1) {
           pathParts.push(`${pathParts.length ? "L" : "M"}${storyX(index).toFixed(2)},${storyY(alignmentValues[index]).toFixed(2)}`);
@@ -1592,7 +1593,7 @@
           pathParts.push(`${pathParts.length ? "L" : "M"}${storyX(currentCursor).toFixed(2)},${storyY(interpolateValue(currentCursor)).toFixed(2)}`);
         }
         storySeries.setAttribute("d", pathParts.join(" "));
-        const playheadX = storyX(currentCursor);
+        const playheadX = plotFocus;
         const playheadY = storyY(interpolateValue(currentCursor));
         storyPlayhead.setAttribute("x1", playheadX.toFixed(2));
         storyPlayhead.setAttribute("x2", playheadX.toFixed(2));
@@ -1615,7 +1616,7 @@
 
         if (activeEvent) {
           const eventX = storyX(activeEvent.index);
-          const pointWidth = (plotRight - plotLeft) / windowSpan;
+          const pointWidth = (plotFocus - plotLeft) / windowSpan;
           storyEventWindow.setAttribute("x", (eventX - pointWidth * 3).toFixed(2));
           storyEventWindow.setAttribute("width", (pointWidth * 6).toFixed(2));
           storyEventWindow.classList.add("is-visible");
@@ -1634,10 +1635,12 @@
         }
 
         const firstVisibleIndex = Math.max(0, Math.ceil(windowStart));
-        const middleIndex = Math.round((firstVisibleIndex + lastIndex) / 2);
-        storyStartTick.textContent = formatStoryTick(alignmentDates[firstVisibleIndex]);
-        storyMiddleTick.textContent = formatStoryTick(alignmentDates[middleIndex]);
-        storyEndTick.textContent = formatStoryTick(alignmentDates[lastIndex]);
+        const firstTickX = storyX(firstVisibleIndex);
+        storyStartTick.setAttribute("x", firstTickX.toFixed(2));
+        storyStartTick.textContent = plotFocus - firstTickX > 90 ? formatStoryTick(alignmentDates[firstVisibleIndex]) : "";
+        storyMiddleTick.setAttribute("x", plotFocus.toFixed(2));
+        storyMiddleTick.textContent = formatStoryTick(alignmentDates[lastIndex]);
+        storyEndTick.textContent = "";
         storyCurrentDate.textContent = formatStoryDate(alignmentDates[lastIndex]);
         const reached = alignmentEvents.filter((event) => event.index <= currentCursor).length;
         storyEventCount.textContent = `${reached} of ${alignmentEvents.length} events reached`;
