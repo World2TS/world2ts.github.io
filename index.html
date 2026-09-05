@@ -11,7 +11,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="World2TS">
     <meta property="og:title" content="World2TS: Real-World Event Context for Time-Series Forecasting">
-    <meta property="og:description" content="An open, human-validated resource aligning diverse time series with scoped real-world event context.">
+    <meta property="og:description" content="A human-reviewed dataset linking diverse time series to relevant real-world events with traceable evidence and explicit timing.">
     <meta property="og:url" content="https://world2ts.github.io/">
     <meta property="og:image" content="https://world2ts.github.io/world2ts-assets/world2ts-mark.png">
     <meta name="twitter:card" content="summary">
@@ -1087,8 +1087,8 @@
           <div class="eyebrow">Open Dataset · Real-World Events × Time Series</div>
           <h1><span class="title-mark">World2TS:</span> Real-World Event Context for Time-Series Forecasting</h1>
           <p class="hero-deck">
-            A human-validated resource that aligns diverse time series with scoped, temporally honest
-            real-world event context through an auditable CLI–Agent workflow.
+            A human-reviewed dataset that links diverse time series to relevant real-world events,
+            records when the information became available, and preserves the evidence behind every link.
           </p>
           <div class="identity-strip" role="group" aria-label="Authors and affiliations">
             <div class="institution-logo tsinghua-logo">
@@ -1126,36 +1126,36 @@
           <div class="section-heading">
             <span class="section-index">01 · Overview</span>
             <div class="section-title-wrap">
-              <h2>Events grounded in the series they describe.</h2>
-              <p class="section-lead">World2TS combines mature public time-series collections with newly collected online series under one event-aware release contract.</p>
+              <h2>Real-world events linked to relevant time series.</h2>
+              <p class="section-lead">World2TS brings public benchmark collections and newly collected online series into one dataset with shared metadata and validation rules.</p>
             </div>
           </div>
           <div class="abstract-grid">
             <p class="abstract-copy">
               Forecasting in the real world is rarely isolated from policy decisions, extreme weather,
               public-health shifts, operational disruptions, and market news. <strong>World2TS</strong>
-              connects these events to the series for which they are semantically relevant—without
-              treating temporal co-occurrence as causality. An LLM handles semantic judgment, the CLI
-              enforces deterministic contracts, and humans approve both the search strategy and the final publication.
+              links events to the time series they are relevant to, while treating a shared date as an
+              association rather than proof of causation. An LLM proposes and reviews event links,
+              software records and validates the files, and people approve the search plan and final dataset.
             </p>
             <ol class="principles">
-              <li><b>01</b><div><strong>Scoped event links</strong><span>Events are projected only to supported series.</span></div></li>
-              <li><b>02</b><div><strong>Honest time roles</strong><span>Actual, forecast, decision, concurrent, and retrospective context remain distinct.</span></div></li>
-              <li><b>03</b><div><strong>Human accountability</strong><span>Two review gates bind approval to exact artifacts.</span></div></li>
+              <li><b>01</b><div><strong>Relevant event links</strong><span>Each event is linked only to time series for which it is relevant.</span></div></li>
+              <li><b>02</b><div><strong>Explicit event timing</strong><span>We record whether information was available before, during, or after the forecast period.</span></div></li>
+              <li><b>03</b><div><strong>Human review</strong><span>People review the search plan and final event records before release.</span></div></li>
             </ol>
           </div>
           <article class="alignment-story" id="alignmentStory" aria-labelledby="alignmentStoryTitle">
             <div class="alignment-story-head">
               <div class="alignment-story-copy">
                 <span class="figure-kicker">World2TS at a glance · real multi-event energy series</span>
-                <h3 id="alignmentStoryTitle">Watch verified events enter a moving time series.</h3>
-                <p>The center line always marks the latest observation. Real 2024 RWTC history moves left as eleven representative verified events enter at the center; each marker is linked context, not a claim of causality.</p>
+                <h3 id="alignmentStoryTitle">See verified events along a real time series.</h3>
+                <p>The 2024 WTI price history moves from right to left. When an event date reaches the center line, its source and summary appear. The markers show association with the series, not proof that an event caused a price movement.</p>
               </div>
               <button class="story-replay" id="storyReplay" type="button" aria-label="Pause the moving time-series animation">Pause timeline</button>
             </div>
             <div class="story-stage">
               <div class="story-plot">
-                <div class="story-chart-label">RWTC · WTI spot price at Cushing · USD/barrel</div>
+                <div class="story-chart-label">WTI spot price at Cushing · USD/barrel</div>
                 <div class="story-live-badge"><i aria-hidden="true"></i><span>2024 timeline replay</span></div>
                 <aside class="story-event-card" id="storyEventCard" aria-live="polite">
                   <span id="storyEventMeta">Verified event</span>
@@ -1167,8 +1167,8 @@
                   <p id="storyEventSummary">North Dakota output and several U.S. refineries were disrupted.</p>
                 </aside>
                 <svg id="alignmentChart" viewBox="0 0 1040 380" role="img" aria-labelledby="alignmentChartTitle alignmentChartDesc">
-                  <title id="alignmentChartTitle">Center-anchored 2024 WTI spot-price timeline with verified events</title>
-                  <desc id="alignmentChartDesc">Real daily RWTC history moves left while the latest observation remains at the center. Verified event markers appear when they reach that fixed current-time position.</desc>
+                  <title id="alignmentChartTitle">2024 WTI spot-price timeline with verified events</title>
+                  <desc id="alignmentChartDesc">The WTI price history moves left. The center line marks the latest visible observation, and an event marker appears when its date reaches that line.</desc>
                   <line class="story-gridline" x1="66" x2="1008" y1="138" y2="138"></line>
                   <line class="story-gridline" x1="66" x2="1008" y1="233" y2="233"></line>
                   <line class="story-gridline" x1="66" x2="1008" y1="328" y2="328"></line>
@@ -1185,13 +1185,13 @@
                   <text class="story-tick-label" x="55" y="142" text-anchor="end">85</text>
                   <text class="story-tick-label" x="55" y="237" text-anchor="end">70</text>
                   <text class="story-tick-label" x="55" y="332" text-anchor="end">55</text>
-                  <text class="story-tick-label" x="66" y="373">Observed history moves left · latest observation remains centered</text>
+                  <text class="story-tick-label" x="66" y="373">Price history moves left · center line marks the latest visible observation</text>
                 </svg>
               </div>
               <div class="story-timeline-footer" aria-label="Animation progress">
                 <strong id="storyCurrentDate">Jan 02, 2024</strong>
                 <div class="story-progress-track" aria-hidden="true"><i id="storyProgressBar"></i></div>
-                <span id="storyEventCount">0 of 11 events reached</span>
+                <span id="storyEventCount">0 of 11 events shown</span>
               </div>
             </div>
           </article>
@@ -1211,17 +1211,17 @@
           <div class="section-heading">
             <span class="section-index">02 · Framework</span>
             <div class="section-title-wrap">
-              <h2>Agent judgment, CLI execution, human approval.</h2>
-              <p class="section-lead">A real RWTC case makes every stage concrete—from series semantics and evidence retrieval to event screening, revision, approval, and publication.</p>
+              <h2>LLM proposals, automated searches, and human review.</h2>
+              <p class="section-lead">A real WTI price example shows how World2TS identifies candidate events, searches for evidence, reviews sources, and publishes approved records.</p>
             </div>
           </div>
           <figure class="figure-shell framework-figure">
             <div class="figure-toolbar">
-              <span class="figure-kicker">Construction framework · real energy case</span>
+              <span class="figure-kicker">Dataset construction · WTI price example</span>
               <a href="world2ts-assets/framework.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a>
             </div>
-            <img class="figure-image" src="world2ts-assets/framework-preview.png" width="2773" height="1348" loading="lazy" decoding="async" alt="World2TS window-wise, human-in-the-loop CLI and agent framework">
-            <figcaption><strong>Framework.</strong> The LLM interprets series semantics, proposes window-specific event leads, writes searches, and judges evidence. The CLI executes and records the workflow, while two human gates approve the search plan and the final release.</figcaption>
+            <img class="figure-image" src="world2ts-assets/framework-preview.png" width="2773" height="1348" loading="lazy" decoding="async" alt="World2TS workflow for finding and reviewing events linked to a time series">
+            <figcaption><strong>Workflow.</strong> The LLM proposes candidate events and search queries. Software runs each search and records the results. People review the search plan and approve the final event records.</figcaption>
           </figure>
         </div>
       </section>
@@ -1231,8 +1231,8 @@
           <div class="section-heading">
             <span class="section-index">03 · Dataset</span>
             <div class="section-title-wrap">
-              <h2>One release, many data origins.</h2>
-              <p class="section-lead">GIFT-Eval benchmark collections and eight online source adapters enter the same strict Arrow + metadata boundary before event discovery.</p>
+              <h2>One dataset, many sources.</h2>
+              <p class="section-lead">Existing GIFT-Eval collections and series from eight online sources are converted to the same Arrow file format, described with the same metadata fields, and then searched for relevant events.</p>
             </div>
           </div>
           <div class="dataset-toolbar">
@@ -1248,12 +1248,12 @@
               <tbody id="datasetRows"></tbody>
             </table>
           </div>
-          <div class="table-note"><span id="datasetCount">31 datasets shown</span><span>Snapshot generated from the current World2TS analysis tables</span></div>
+          <div class="table-note"><span id="datasetCount">31 datasets shown</span><span>Numbers shown here come from the current World2TS dataset summary</span></div>
 
           <div class="analysis-grid">
             <article class="analysis-card">
               <h3>Event coverage by dataset</h3>
-              <p>Average linked events per series and the fraction of series with at least one in-range event.</p>
+              <p>Average number of linked events per series and the percentage of series with at least one event dated within its observation period.</p>
               <div class="table-shell coverage-table">
                 <table><thead><tr><th>Name</th><th>Avg. events / series</th><th>Series coverage</th></tr></thead><tbody id="coverageRows"></tbody></table>
               </div>
@@ -1268,43 +1268,43 @@
             <span class="section-index">04 · Analysis</span>
             <div class="section-title-wrap">
               <h2>What kinds of events does World2TS capture?</h2>
-              <p class="section-lead">Dataset-level semantic summaries and series-aligned case studies reveal both event diversity and the limits of interpretation.</p>
+              <p class="section-lead">Dataset summaries and case studies show the range of recorded events and the limits of what can be inferred from their timing.</p>
             </div>
           </div>
           <div class="stack">
             <div>
-              <div class="analysis-caption"><h3>Domain event vocabulary</h3><p>Atomic event concepts are shown separately for six domain groups; environment-related datasets are analyzed with weather, while calendar observances are fused and visually capped.</p></div>
+              <div class="analysis-caption"><h3>Common event topics by domain</h3><p>Each word cloud summarizes common event topics for one of six domains. Environmental topics are grouped with weather, and multi-word terms are kept together.</p></div>
               <figure class="figure-shell analysis-figure wordcloud-figure">
-                <div class="figure-toolbar"><span class="figure-kicker">Semantic landscape · six domains</span><a href="world2ts-assets/word-cloud.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                <div class="figure-toolbar"><span class="figure-kicker">Common event topics · six domains</span><a href="world2ts-assets/word-cloud.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                 <img class="figure-image" src="world2ts-assets/word-cloud-preview.png" width="3096" height="1141" loading="lazy" decoding="async" alt="Domain-specific word clouds for six World2TS domains">
-                <figcaption><strong>Semantic topics.</strong> Phrase-preserving word clouds summarize event families rather than raw summary tokens, keeping each domain visually and statistically separate.</figcaption>
+                <figcaption><strong>Event topics.</strong> Each word cloud keeps multi-word event phrases together and summarizes one domain independently.</figcaption>
               </figure>
             </div>
             <div>
-              <div class="analysis-caption"><h3>Series–event case studies</h3><p>Six cases span weather, finance, health, transport, crypto, and energy; shaded windows show temporal context rather than causal effects.</p></div>
+              <div class="analysis-caption"><h3>Time-series and event examples</h3><p>Six examples cover weather, finance, health, transport, crypto, and energy. Highlighted periods show nearby dates, not causal effects.</p></div>
               <figure class="figure-shell analysis-figure">
                 <div class="figure-toolbar"><span class="figure-kicker">Case study · six domain examples</span><a href="world2ts-assets/case-study.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                 <img class="figure-image" src="world2ts-assets/case-study-preview.png" width="2118" height="1172" loading="lazy" decoding="async" alt="Six time-series event case studies across World2TS domains">
-                <figcaption><strong>Case studies.</strong> Each panel preserves the original series semantics, marks event time and a local context window, and accompanies the chart with a scoped event description.</figcaption>
+                <figcaption><strong>Examples.</strong> Each panel retains the original units, marks the event date and nearby period, and gives an event description relevant to that series.</figcaption>
               </figure>
             </div>
             <div>
-              <div class="analysis-caption"><h3>Event-associated changes across series</h3><p>Representative annual series are aligned with verified event timestamps and compared with seasonally matched no-event windows from the same series.</p></div>
+              <div class="analysis-caption"><h3>Changes near recorded events</h3><p>Representative yearly series are aligned at event dates and compared with similar periods from the same series that have no recorded event nearby.</p></div>
               <div class="contrast-layout">
                 <figure class="figure-shell analysis-figure contrast-figure">
-                  <div class="figure-toolbar"><span class="figure-kicker">Matched-control contrast · three representative domains</span><a href="world2ts-assets/event-contrast.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                  <div class="figure-toolbar"><span class="figure-kicker">Event periods compared with similar no-event periods</span><a href="world2ts-assets/event-contrast.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                   <img class="figure-image" src="world2ts-assets/event-contrast-preview.png" width="2468" height="1060" loading="lazy" decoding="async" alt="Circular event-associated change comparison for energy, crypto, and weather series">
-                  <figcaption><strong>Event-associated change.</strong> The inner ring preserves calendar order. Radial bars encode standardized before/after change around verified events; the gray band and gold line summarize comparable no-event windows. These contrasts are descriptive and do not establish causality.</figcaption>
+                  <figcaption><strong>Changes near event dates.</strong> The inner ring follows calendar order. Radial bars show the size of the before-and-after change around each event; the gray band and gold line summarize similar periods without a recorded event. These comparisons describe associations and do not establish causality.</figcaption>
                 </figure>
                 <aside class="contrast-method" aria-labelledby="contrastMethodTitle">
                   <div class="contrast-method-head">
-                    <h3 id="contrastMethodTitle">How is it computed?</h3>
-                    <span>Same series · equal windows · matched control</span>
+                    <h3 id="contrastMethodTitle">How the comparison is calculated</h3>
+                    <span>Same series · same period length · similar comparison dates</span>
                   </div>
                   <div class="contrast-formulas">
                     <div class="formula-card">
-                      <b>Standardized change intensity</b>
-                      <math display="block" aria-label="C of t and w equals the absolute difference between the after-window median and before-window median, divided by the robust scale of adjacent differences">
+                      <b>Before-and-after change score</b>
+                      <math display="block" aria-label="The change score equals the absolute difference between the median after the date and the median before it, divided by the typical size of adjacent changes">
                         <mi>C</mi><mo>(</mo><mi>t</mi><mo>;</mo><mi>w</mi><mo>)</mo><mo>=</mo>
                         <mfrac>
                           <mrow><mo>|</mo><msub><mi>m</mi><mtext>after</mtext></msub><mo>−</mo><msub><mi>m</mi><mtext>before</mtext></msub><mo>|</mo></mrow>
@@ -1314,21 +1314,21 @@
                       <small>Before/after medians in equal windows, normalized by 1.4826 × MAD(Δ<i>y</i>).</small>
                     </div>
                     <div class="formula-card">
-                      <b>Event amplification</b>
-                      <math display="block" aria-label="A equals the median event-window change intensity divided by the median matched no-event change intensity">
+                      <b>Event-to-comparison ratio</b>
+                      <math display="block" aria-label="The ratio equals the median change near recorded events divided by the median change in comparable periods without a recorded event">
                         <mi>A</mi><mo>=</mo>
                         <mfrac>
                           <mrow><msub><mtext>median</mtext><mi>e</mi></msub><mo>[</mo><mi>C</mi><mo>(</mo><msub><mi>t</mi><mi>e</mi></msub><mo>;</mo><mi>w</mi><mo>)</mo><mo>]</mo></mrow>
                           <mrow><msub><mtext>median</mtext><mi>e</mi></msub><mo>[</mo><mi>C</mi><mo>(</mo><msubsup><mi>t</mi><mrow><mi>c</mi><mo>,</mo><mi>e</mi></mrow><mo>*</mo></msubsup><mo>;</mo><mi>w</mi><mo>)</mo><mo>]</mo></mrow>
                         </mfrac>
                       </math>
-                      <small><i>A</i> &gt; 1: event windows change more than matched no-event windows.</small>
+                      <small><i>A</i> &gt; 1: changes are larger near recorded events than in comparable periods without a recorded event.</small>
                     </div>
                   </div>
                   <ol class="contrast-steps">
-                    <li><b>Equal windows</b><span>Daily ±3 d · hourly ±24 h</span></li>
-                    <li><b>Time match</b><span>Same series, year, quarter, weekday—and hour when applicable.</span></li>
-                    <li><b>State match</b><span>Outside event zones; closest pre-window volatility.</span></li>
+                    <li><b>Same period length</b><span>Daily data: 3 days before and after. Hourly data: 24 hours before and after.</span></li>
+                    <li><b>Match the calendar</b><span>Use the same series, year, quarter, weekday, and hour when applicable.</span></li>
+                    <li><b>Match recent variability</b><span>Choose a period away from recorded events whose recent variation is most similar.</span></li>
                   </ol>
                 </aside>
               </div>
@@ -1343,13 +1343,13 @@
             <span class="section-index">05 · Evaluation</span>
             <div class="section-title-wrap">
               <h2>Does real-world event context improve forecasting?</h2>
-              <p class="section-lead">The main comparison spans six domains and three forecasting metrics. Paired rows isolate the effect of adding World2TS event context to language-model forecasters.</p>
+              <p class="section-lead">The main comparison spans six domains and three forecasting metrics. For each language model, adjacent rows show forecasts with and without World2TS event descriptions.</p>
             </div>
           </div>
           <div class="evaluation-main">
             <div class="analysis-caption">
               <h3>Main forecasting results</h3>
-              <p>Domain-level forecasting error for numerical-only baselines and language-model forecasters with or without World2TS context. Lower is better for every metric.</p>
+              <p>Forecasting errors are reported by domain. For each language model, the numerical-only row and the World2TS-context row show what changes when event descriptions are added. Lower is better for every metric.</p>
             </div>
             <div class="evaluation-table-shell" aria-label="Main World2TS forecasting results" tabindex="0">
               <table class="evaluation-table">
@@ -1463,58 +1463,58 @@
                 </tbody>
               </table>
             </div>
-            <div class="evaluation-note"><span>↓ Lower is better for MAE, RMSE and sMAPE</span><span>Bold values follow the current main-table convention</span></div>
+            <div class="evaluation-note"><span>↓ Lower is better for MAE, RMSE and sMAPE</span><span>Bold marks the lowest error in each domain and metric</span></div>
           </div>
           <div class="case-study-stack">
             <section class="case-study-block" aria-labelledby="forecastCaseTitle">
               <div class="analysis-caption case-study-caption">
-                <span class="case-study-eyebrow">Forecast behavior</span>
+                <span class="case-study-eyebrow">Forecast examples</span>
                 <div class="case-study-copy">
-                  <h3 id="forecastCaseTitle">Qualitative forecasting comparison</h3>
-                  <p>Six representative windows compare the shared ground truth with forecasts from numerical history alone and from the same history augmented with World2TS context.</p>
+                  <h3 id="forecastCaseTitle">Forecast examples across six domains</h3>
+                  <p>Six examples compare the observed future values with forecasts based on numerical history alone and forecasts that also receive World2TS event descriptions.</p>
                 </div>
               </div>
               <figure class="figure-shell case-study-figure forecast-case-figure">
                 <div class="figure-toolbar"><span class="figure-kicker">Forecast case study · six domains</span><a href="world2ts-assets/forecast-case-study.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                 <img class="figure-image" src="world2ts-assets/forecast-case-study-preview.png" width="1911" height="1148" loading="lazy" decoding="async" alt="Forecast comparison for weather, finance, health, transport, crypto, and energy time series">
-                <figcaption><strong>Forecast comparison.</strong> Blue denotes ground truth, orange the numerical-only forecast, and green the forecast with World2TS context. In every panel, the forecast trajectory begins directly after the observed input window.</figcaption>
+                <figcaption><strong>Forecast comparison.</strong> Blue shows the observed future values, orange the numerical-only forecast, and green the forecast with World2TS event descriptions. In every panel, the forecast begins immediately after the displayed history.</figcaption>
               </figure>
             </section>
 
             <section class="case-study-block" aria-labelledby="reasoningTrackTitle">
               <div class="analysis-caption case-study-caption">
-                <span class="case-study-eyebrow">Reasoning tracks</span>
+                <span class="case-study-eyebrow">Reasoning comparison</span>
                 <div class="case-study-copy">
                   <h3 id="reasoningTrackTitle">How event context changes LLM reasoning</h3>
-                  <p>Both tracks follow how event information changes the logic used to turn the same numerical history into a forecast: it resolves a reporting ambiguity in the health case, but extends an uncertain residual-effect hypothesis in the energy case.</p>
+                  <p>Both examples start from the same numerical history and show how an added event description changes the model’s interpretation and forecast. It helps in the health example but hurts in the energy example.</p>
                 </div>
               </div>
               <div class="reasoning-track-list">
                 <article class="reasoning-case">
                   <div class="reasoning-case-head">
-                    <h4>Health · context resolves a reporting-regime ambiguity</h4>
+                    <h4>Health · context explains a change in the reporting schedule</h4>
                     <span class="case-badge positive">Positive Case</span>
                   </div>
                   <figure class="figure-shell case-study-figure">
-                    <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · US COVID-19 reports</span><a href="world2ts-assets/reasoning-health-positive.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                    <div class="figure-toolbar"><span class="figure-kicker">Model reasoning · US COVID-19 reports</span><a href="world2ts-assets/reasoning-health-positive.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                     <img class="figure-image" src="world2ts-assets/reasoning-health-positive-preview.png" width="1603" height="1311" loading="lazy" decoding="async" alt="Health reasoning trace comparing numerical-only and context-aware forecasts">
-                    <figcaption><strong>Positive Case.</strong> The context-aware path interprets the post–October 20 floor-and-spike pattern through the CDC reporting change, uses the first complete post-change week as its template, and retains the Friday spike.</figcaption>
+                    <figcaption><strong>Positive Case.</strong> With context, the model links the floor-and-spike pattern after October 20 to the CDC switch to weekly reporting, repeats the first complete week after the change, and retains the Friday spike.</figcaption>
                   </figure>
                 </article>
 
                 <article class="reasoning-case">
                   <div class="reasoning-case-head">
-                    <h4>Energy · context extends an uncertain event mechanism</h4>
+                    <h4>Energy · context overstates lingering storm effects</h4>
                     <span class="case-badge negative">Negative Case</span>
                   </div>
                   <figure class="figure-shell case-study-figure">
-                    <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · NSW electricity demand</span><a href="world2ts-assets/reasoning-energy-counterexample.png" target="_blank" rel="noopener">Open full resolution ↗</a></div>
+                    <div class="figure-toolbar"><span class="figure-kicker">Model reasoning · NSW electricity demand</span><a href="world2ts-assets/reasoning-energy-counterexample.png" target="_blank" rel="noopener">Open full resolution ↗</a></div>
                     <img class="figure-image" src="world2ts-assets/reasoning-energy-counterexample-preview.png" width="1600" height="1280" loading="lazy" decoding="async" alt="Energy reasoning trace showing a negative case where event context degrades the forecast">
-                    <figcaption><strong>Negative Case.</strong> The numerical-only path preserves daily seasonality and recent level continuity. With context, the model considers residual storm and outage effects, shifts the forecast downward, and increases MAE by 93.1%.</figcaption>
+                    <figcaption><strong>Negative Case.</strong> The numerical-only forecast follows the daily pattern and recent demand level. With context, the model assumes that storm and outage effects continue into the forecast period, shifts the forecast downward, and increases MAE by 93.1%.</figcaption>
                   </figure>
                 </article>
               </div>
-              <p class="case-separator-note">The stage headings summarize each trace’s own logical progression; the two paths are intentionally not forced into a shared sequence.</p>
+              <p class="case-separator-note">Each example follows the steps present in the model output. We do not force both reasoning traces into the same template.</p>
             </section>
           </div>
         </div>
@@ -1537,8 +1537,8 @@
 }</pre>
             </div>
             <aside class="release-card">
-              <span class="status-label">Public contract</span><h3>Minimal by design.</h3>
-              <p>The release exposes dataset information, verified event records, and series-scoped event links.</p>
+              <span class="status-label">Released files</span><h3>Minimal by design.</h3>
+              <p>The public release contains dataset descriptions, verified event records, and links between each time series and its relevant events.</p>
               <code>dataset_info.json</code><code>unified_events.jsonl</code><code>unified_event_series.jsonl</code>
             </aside>
           </div>
@@ -1773,7 +1773,7 @@
         storyEndTick.textContent = "";
         storyCurrentDate.textContent = formatStoryDate(alignmentDates[lastIndex]);
         const reached = alignmentEvents.filter((event) => event.index <= currentCursor).length;
-        storyEventCount.textContent = `${reached} of ${alignmentEvents.length} events reached`;
+        storyEventCount.textContent = `${reached} of ${alignmentEvents.length} events shown`;
         storyProgressBar.style.width = `${((currentCursor - timelineStartIndex) / (alignmentValues.length - 1 - timelineStartIndex)) * 100}%`;
       };
 
