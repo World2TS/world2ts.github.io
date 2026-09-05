@@ -913,7 +913,7 @@
         text-transform: uppercase;
       }
       .case-badge.positive { color: #0b775f; background: #edf8f4; }
-      .case-badge.counterexample { color: #9b5a13; background: #fff6e9; }
+      .case-badge.negative { color: #9b5a13; background: #fff6e9; }
       .reasoning-case .case-study-figure {
         display: flex;
         padding: 17px 17px 18px;
@@ -1493,24 +1493,24 @@
                 <article class="reasoning-case">
                   <div class="reasoning-case-head">
                     <h4>Health · context resolves a reporting-regime ambiguity</h4>
-                    <span class="case-badge positive">Positive case</span>
+                    <span class="case-badge positive">Positive Case</span>
                   </div>
                   <figure class="figure-shell case-study-figure">
                     <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · US COVID-19 reports</span><a href="world2ts-assets/reasoning-health-positive.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
                     <img class="figure-image" src="world2ts-assets/reasoning-health-positive-preview.png" width="1603" height="1311" loading="lazy" decoding="async" alt="Health reasoning trace comparing numerical-only and context-aware forecasts">
-                    <figcaption><strong>Positive case.</strong> The context-aware path interprets the post–October 20 floor-and-spike pattern through the CDC reporting change, uses the first complete post-change week as its template, and retains the Friday spike.</figcaption>
+                    <figcaption><strong>Positive Case.</strong> The context-aware path interprets the post–October 20 floor-and-spike pattern through the CDC reporting change, uses the first complete post-change week as its template, and retains the Friday spike.</figcaption>
                   </figure>
                 </article>
 
                 <article class="reasoning-case">
                   <div class="reasoning-case-head">
                     <h4>Energy · context extends an uncertain event mechanism</h4>
-                    <span class="case-badge counterexample">Counterexample</span>
+                    <span class="case-badge negative">Negative Case</span>
                   </div>
                   <figure class="figure-shell case-study-figure">
                     <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · NSW electricity demand</span><a href="world2ts-assets/reasoning-energy-counterexample.png" target="_blank" rel="noopener">Open full resolution ↗</a></div>
-                    <img class="figure-image" src="world2ts-assets/reasoning-energy-counterexample-preview.png" width="1600" height="1280" loading="lazy" decoding="async" alt="Energy reasoning trace showing a counterexample where event context degrades the forecast">
-                    <figcaption><strong>Counterexample.</strong> The numerical-only path preserves daily seasonality and recent level continuity. With context, the model considers residual storm and outage effects, shifts the forecast downward, and increases MAE by 93.1.</figcaption>
+                    <img class="figure-image" src="world2ts-assets/reasoning-energy-counterexample-preview.png" width="1600" height="1280" loading="lazy" decoding="async" alt="Energy reasoning trace showing a negative case where event context degrades the forecast">
+                    <figcaption><strong>Negative Case.</strong> The numerical-only path preserves daily seasonality and recent level continuity. With context, the model considers residual storm and outage effects, shifts the forecast downward, and increases MAE by 93.1%.</figcaption>
                   </figure>
                 </article>
               </div>
