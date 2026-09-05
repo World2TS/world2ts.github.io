@@ -680,7 +680,7 @@
       .analysis-grid {
         display: grid;
         width: min(100%, var(--content-rail));
-        grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+        grid-template-columns: 1fr;
         gap: 24px;
         margin: 45px auto 0;
       }
@@ -689,68 +689,6 @@
       .analysis-card > p { min-height: 52px; color: var(--muted); font-size: 13px; }
       .coverage-table { max-height: 390px; }
       .coverage-value { color: var(--blue-deep); font-family: var(--mono); font-weight: 500; }
-
-      .placeholder {
-        position: relative;
-        display: grid;
-        flex: 1;
-        min-height: 390px;
-        padding: 36px;
-        place-items: center;
-        overflow: hidden;
-        color: #66777c;
-        border: 1px dashed #8f9c9d;
-        background:
-          linear-gradient(90deg, rgba(20, 77, 105, 0.035) 1px, transparent 1px),
-          linear-gradient(rgba(20, 77, 105, 0.035) 1px, transparent 1px),
-          rgba(255, 254, 250, 0.54);
-        background-size: 28px 28px;
-        text-align: center;
-      }
-      .placeholder::before, .placeholder::after {
-        position: absolute;
-        width: 34px;
-        height: 34px;
-        content: "";
-      }
-      .placeholder::before {
-        top: 13px;
-        left: 13px;
-        border-top: 2px solid var(--gold);
-        border-left: 2px solid var(--gold);
-      }
-      .placeholder::after {
-        right: 13px;
-        bottom: 13px;
-        border-right: 2px solid var(--gold);
-        border-bottom: 2px solid var(--gold);
-      }
-      .placeholder-inner { max-width: 390px; }
-      .placeholder-icon {
-        display: inline-grid;
-        width: 53px;
-        height: 53px;
-        margin-bottom: 17px;
-        place-items: center;
-        color: var(--blue);
-        border: 1px solid var(--blue);
-        border-radius: 50%;
-        font-family: var(--serif);
-        font-size: 27px;
-      }
-      .placeholder h3 { margin-bottom: 7px; font-size: 25px; }
-      .placeholder p { margin-bottom: 13px; font-size: 13px; }
-      .placeholder small {
-        display: inline-block;
-        padding: 4px 8px;
-        color: #7a6634;
-        border: 1px solid #d7c084;
-        background: #fff9e8;
-        font-family: var(--mono);
-        font-size: 8px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
 
       .stack { display: grid; gap: 86px; }
       .analysis-caption { max-width: 1040px; margin: 0 auto 22px; }
@@ -897,25 +835,92 @@
         font-family: var(--mono);
         font-size: 9px;
       }
-      .forecast-intro { max-width: 1040px; margin: 0 auto 21px; }
-      .forecast-placeholders {
+      .case-study-stack {
         display: grid;
-        width: min(100%, 1120px);
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        width: min(100%, 1240px);
+        gap: 76px;
         margin: 0 auto;
       }
-      .forecast-placeholder { min-height: 245px; padding: 24px; }
-      .forecast-placeholder .placeholder-icon { width: 42px; height: 42px; font-size: 21px; }
-      .forecast-placeholder h3 { font-size: 21px; }
-      .availability-note {
+      .case-study-block { min-width: 0; padding: 0; }
+      .case-study-caption {
+        display: grid;
+        max-width: 1120px;
+        margin-bottom: 22px;
+        grid-template-columns: 118px minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+      }
+      .case-study-caption .case-study-eyebrow {
+        padding-top: 7px;
+        color: #8a6417;
+        border-top: 2px solid var(--gold);
+        font-family: var(--mono);
+        font-size: 8px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .case-study-copy h3 { margin-bottom: 6px; font-size: 28px; }
+      .case-study-copy p { max-width: 850px; margin: 0; color: var(--muted); font-size: 14px; }
+      .case-study-figure {
+        width: min(100%, 1240px);
+        max-width: none;
+        padding: 25px 28px 24px;
+      }
+      .case-study-figure .figure-toolbar,
+      .case-study-figure .figure-image,
+      .case-study-figure figcaption { width: 100%; max-width: none; }
+      .forecast-case-figure .figure-image { border-color: #aeb8b7; }
+      .reasoning-track-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        align-items: start;
+      }
+      .reasoning-case {
+        position: relative;
+        padding-top: 18px;
+        border-top: 1px solid var(--rule-dark);
+      }
+      .reasoning-case::before {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 92px;
+        height: 3px;
+        background: var(--gold);
+        content: "";
+      }
+      .reasoning-case-head {
+        display: flex;
         width: min(100%, 1120px);
-        margin: 32px auto 0;
-        padding: 17px 19px;
-        color: #625a47;
-        border-left: 3px solid var(--gold);
-        background: #fbf4e2;
-        font-size: 13px;
+        gap: 7px;
+        align-items: flex-start;
+        flex-direction: column;
+        margin: 0 auto 13px;
+      }
+      .reasoning-case-head h4 { margin: 0; color: var(--ink); font-family: var(--serif); font-size: 20px; }
+      .case-badge {
+        flex: 0 0 auto;
+        padding: 5px 9px;
+        border: 1px solid currentColor;
+        font-family: var(--mono);
+        font-size: 8px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .case-badge.positive { color: #0b775f; background: #edf8f4; }
+      .case-badge.counterexample { color: #9b5a13; background: #fff6e9; }
+      .reasoning-case .case-study-figure { padding: 17px 17px 18px; }
+      .reasoning-case figcaption { max-width: 1060px; }
+      .case-separator-note {
+        width: min(100%, 1120px);
+        margin: 24px auto 0;
+        color: #627176;
+        font-family: var(--mono);
+        font-size: 9px;
+        line-height: 1.55;
       }
 
       .citation-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 32px; }
@@ -984,7 +989,7 @@
         .contrast-steps li + li { padding-left: 15px; }
         .contrast-steps li:last-child { padding-right: 0; border-right: 0; }
         .contrast-steps b { margin-bottom: 4px; }
-        .forecast-placeholders { grid-template-columns: 1fr; }
+        .reasoning-track-list { grid-template-columns: 1fr; gap: 46px; }
       }
       @media (max-width: 720px) {
         .page-width, .wide-width { width: min(100% - 28px, 1160px); }
@@ -1027,7 +1032,10 @@
         .contrast-formulas, .contrast-steps { grid-template-columns: 1fr; }
         .contrast-steps li, .contrast-steps li + li { display: block; padding: 14px 0; border-right: 0; border-bottom: 1px solid var(--rule); }
         .contrast-steps li:last-child { border-bottom: 0; }
-        .placeholder { min-height: 310px; }
+        .case-study-caption { grid-template-columns: 1fr; gap: 9px; }
+        .case-study-caption .case-study-eyebrow { width: max-content; }
+        .case-study-copy h3 { font-size: 25px; }
+        .reasoning-case-head { align-items: flex-start; flex-direction: column; gap: 9px; }
         .figure-shell { padding: 18px 14px; }
         .figure-toolbar { align-items: flex-start; flex-direction: column; }
       }
@@ -1040,7 +1048,7 @@
   </head>
   <body>
     <div class="prototype-strip">
-      Project page preview · paper, dataset download and qualitative forecast cases remain pending
+      Project page preview · paper and dataset download remain pending
     </div>
     <header class="topbar">
       <div class="page-width topbar-inner">
@@ -1232,17 +1240,6 @@
               <p>Average linked events per series and the fraction of series with at least one in-range event.</p>
               <div class="table-shell coverage-table">
                 <table><thead><tr><th>Name</th><th>Avg. events / series</th><th>Series coverage</th></tr></thead><tbody id="coverageRows"></tbody></table>
-              </div>
-            </article>
-            <article class="analysis-card">
-              <h3>Temporal coverage</h3>
-              <p>Planned dataset diagnostic: observed time span, event density, monthly event coverage, and longest event-free interval.</p>
-              <div class="placeholder">
-                <div class="placeholder-inner">
-                  <span class="placeholder-icon">↔</span><h3>Temporal Coverage</h3>
-                  <p>A dataset-by-time coverage strip will pair series spans with verified-event timestamps and monthly coverage.</p>
-                  <small>Planned dataset analysis · not yet rendered</small>
-                </div>
               </div>
             </article>
           </div>
@@ -1452,16 +1449,58 @@
             </div>
             <div class="evaluation-note"><span>↓ Lower is better for MAE, RMSE and sMAPE</span><span>Bold values follow the current main-table convention</span></div>
           </div>
-          <div class="forecast-intro analysis-caption">
-            <h3>Qualitative forecasting cases</h3>
-            <p>Reserved for aligned forecasts with and without World2TS context; the three slots retain the final paper-ready layout.</p>
+          <div class="case-study-stack">
+            <section class="case-study-block" aria-labelledby="forecastCaseTitle">
+              <div class="analysis-caption case-study-caption">
+                <span class="case-study-eyebrow">Forecast behavior</span>
+                <div class="case-study-copy">
+                  <h3 id="forecastCaseTitle">Qualitative forecasting comparison</h3>
+                  <p>Six representative windows compare the shared ground truth with forecasts from numerical history alone and from the same history augmented with World2TS context.</p>
+                </div>
+              </div>
+              <figure class="figure-shell case-study-figure forecast-case-figure">
+                <div class="figure-toolbar"><span class="figure-kicker">Forecast case study · six domains</span><a href="world2ts-assets/forecast-case-study.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                <img class="figure-image" src="world2ts-assets/forecast-case-study-preview.png" width="1911" height="1148" loading="lazy" decoding="async" alt="Forecast comparison for weather, finance, health, transport, crypto, and energy time series">
+                <figcaption><strong>Forecast comparison.</strong> Blue denotes ground truth, orange the numerical-only forecast, and green the forecast with World2TS context. In every panel, the forecast trajectory begins directly after the observed input window.</figcaption>
+              </figure>
+            </section>
+
+            <section class="case-study-block" aria-labelledby="reasoningTrackTitle">
+              <div class="analysis-caption case-study-caption">
+                <span class="case-study-eyebrow">Reasoning tracks</span>
+                <div class="case-study-copy">
+                  <h3 id="reasoningTrackTitle">How event context changes LLM reasoning</h3>
+                  <p>Both tracks follow how event information changes the logic used to turn the same numerical history into a forecast: it resolves a reporting ambiguity in the health case, but extends an uncertain residual-effect hypothesis in the energy case.</p>
+                </div>
+              </div>
+              <div class="reasoning-track-list">
+                <article class="reasoning-case">
+                  <div class="reasoning-case-head">
+                    <h4>Health · context resolves a reporting-regime ambiguity</h4>
+                    <span class="case-badge positive">Positive case</span>
+                  </div>
+                  <figure class="figure-shell case-study-figure">
+                    <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · US COVID-19 reports</span><a href="world2ts-assets/reasoning-health-positive.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                    <img class="figure-image" src="world2ts-assets/reasoning-health-positive-preview.png" width="1603" height="1311" loading="lazy" decoding="async" alt="Health reasoning trace comparing numerical-only and context-aware forecasts">
+                    <figcaption><strong>Positive case.</strong> The context-aware path interprets the post–October 20 floor-and-spike pattern through the CDC reporting change, uses the first complete post-change week as its template, and retains the Friday spike.</figcaption>
+                  </figure>
+                </article>
+
+                <article class="reasoning-case">
+                  <div class="reasoning-case-head">
+                    <h4>Energy · context extends an uncertain event mechanism</h4>
+                    <span class="case-badge counterexample">Counterexample</span>
+                  </div>
+                  <figure class="figure-shell case-study-figure">
+                    <div class="figure-toolbar"><span class="figure-kicker">Reasoning case · NSW electricity demand</span><a href="world2ts-assets/reasoning-energy-counterexample.pdf" target="_blank" rel="noopener">Open vector PDF ↗</a></div>
+                    <img class="figure-image" src="world2ts-assets/reasoning-energy-counterexample-preview.png" width="1614" height="1291" loading="lazy" decoding="async" alt="Energy reasoning trace showing a counterexample where event context degrades the forecast">
+                    <figcaption><strong>Counterexample.</strong> The numerical-only path preserves daily seasonality and recent level continuity. With context, the model considers residual storm and outage effects, shifts the forecast downward, and increases MAE by 93.1.</figcaption>
+                  </figure>
+                </article>
+              </div>
+              <p class="case-separator-note">The stage headings summarize each trace’s own logical progression; the two paths are intentionally not forced into a shared sequence.</p>
+            </section>
           </div>
-          <div class="forecast-placeholders">
-            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">A</span><h3>Forecast Case A</h3><p>Prediction with and without World2TS context.</p><small>Reserved qualitative result</small></div></div>
-            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">B</span><h3>Forecast Case B</h3><p>Event-sensitive forecast comparison.</p><small>Reserved qualitative result</small></div></div>
-            <div class="placeholder forecast-placeholder"><div class="placeholder-inner"><span class="placeholder-icon">C</span><h3>Forecast Case C</h3><p>Failure mode or context-ablation example.</p><small>Reserved qualitative result</small></div></div>
-          </div>
-          <p class="availability-note">The quantitative main table is now included. Only the three qualitative forecast cases remain reserved, so they can be inserted later without changing the page hierarchy.</p>
         </div>
       </section>
 
