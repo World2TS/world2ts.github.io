@@ -4,8 +4,9 @@ This repository publishes the academic project page for **World2TS: Real-World E
 
 - Project page: <https://world2ts.github.io/>
 - Code: <https://github.com/yangjq713/World2TS>
+- Dataset: <https://huggingface.co/datasets/JJqian/world2ts-data>
 
-The current page is a public layout preview. The main evaluation table, qualitative forecasting comparison, and paired reasoning case studies are included; paper links and dataset downloads will be updated when finalized.
+The page links to the World2TS dataset release and includes the main evaluation table, qualitative forecasting comparison, and paired reasoning case studies. The paper link will be added when finalized.
 
 ## Local preview
 

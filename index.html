@@ -1064,7 +1064,7 @@
   </head>
   <body>
     <div class="prototype-strip">
-      Project page preview · paper and dataset download remain pending
+      Project page preview · paper link pending · dataset release on Hugging Face
     </div>
     <header class="topbar">
       <div class="page-width topbar-inner">
@@ -1115,8 +1115,8 @@
           <div class="resource-links">
             <span class="resource-button pending" aria-disabled="true">Paper · soon</span>
             <a class="resource-button" href="https://github.com/yangjq713/World2TS">Code · GitHub</a>
-            <a class="resource-button secondary" href="#dataset">Dataset · Preview</a>
-            <span class="resource-button pending" aria-disabled="true">Hugging Face · soon</span>
+            <a class="resource-button secondary" href="#dataset">Dataset · Explore</a>
+            <a class="resource-button" href="https://huggingface.co/datasets/JJqian/world2ts-data">Dataset · Hugging Face</a>
           </div>
         </div>
       </header>
@@ -1232,7 +1232,7 @@
             <span class="section-index">03 · Dataset</span>
             <div class="section-title-wrap">
               <h2>One dataset, many sources.</h2>
-              <p class="section-lead">Existing GIFT-Eval collections and series from eight online sources are converted to the same Arrow file format, described with the same metadata fields, and then searched for relevant events.</p>
+              <p class="section-lead">World2TS releases event descriptions and series links for all 31 configurations. Numeric Arrow files are hosted for 26 configurations; the remaining numeric series must be obtained from their original providers under the providers' terms. <a href="https://huggingface.co/datasets/JJqian/world2ts-data">Browse the data and source notes on Hugging Face ↗</a></p>
             </div>
           </div>
           <div class="dataset-toolbar">
@@ -1538,14 +1538,14 @@
             </div>
             <aside class="release-card">
               <span class="status-label">Released files</span><h3>Minimal by design.</h3>
-              <p>The public release contains dataset descriptions, verified event records, and links between each time series and its relevant events.</p>
+              <p>The public release contains dataset descriptions, event records, and links between time series and relevant events. Numeric Arrow files are included where redistribution is supported.</p>
               <code>dataset_info.json</code><code>unified_events.jsonl</code><code>unified_event_series.jsonl</code>
             </aside>
           </div>
         </div>
       </section>
     </main>
-    <footer><div class="page-width">World2TS academic project page · preview release 2026-08-29</div></footer>
+    <footer><div class="page-width">World2TS academic project page</div></footer>
 
     <script>
       const datasets = [
